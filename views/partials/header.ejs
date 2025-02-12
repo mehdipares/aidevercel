@@ -1,0 +1,53 @@
+<body>
+  <header>
+    <div class="nav-container">
+        <img src="/static/images/logo.png" alt="Logo">
+
+        <nav>
+            <a href="/">Accueil</a>
+            <a href="/catways">Catways</a>
+            <a href="/reservations">Réservations</a>
+            <a href="/utilisateurs">Utilisateurs</a>
+            <button id="menuToggle" class="menu-button">☰ Menu</button>
+        </nav>
+    </div>
+
+    <!-- Menu latéral -->
+    <div id="sideMenu" class="side-menu">
+        <button id="closeMenu" class="close-button">&times;</button>
+
+        <!-- Affichage de la date -->
+        <p id="currentDate">📅 Chargement...</p>
+        <hr />
+
+        <!-- Infos utilisateur -->
+        <p>Nom : <span id="userName" data-user-name="<%= user?.name || '' %>"><%= user?.name || "Non connecté" %></span></p>
+        <p>Email : <span id="userEmail" data-user-email="<%= user?.email || '' %>"><%= user?.email || "Non disponible" %></span></p>
+        <hr />
+
+        <!-- Tableau des réservations en cours -->
+        <h3>Réservations en cours</h3>
+        <table id="reservationsTable">
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="3">Chargement...</td></tr>
+            </tbody>
+        </table>
+        <hr />
+
+        <!-- Lien vers la documentation API -->
+        <a href="/documentation" class="menu-link">📖 Documentation API</a>
+
+        <hr />
+        <a href="/logout" class="menu-link">Déconnexion</a>
+    </div>
+  </header>
+
+  <script src="/static/js/menu.js"></script>
+</body>

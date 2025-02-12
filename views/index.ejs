@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Port de Plaisance</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<%- include('partials/header') %>
+
+<main id="homepage">
+    <section id="welcome-section">
+        <h1>Bienvenue au Port de Plaisance</h1>
+        <p>Découvrez la gestion des catways, des réservations et bien plus encore.</p>
+    </section>
+
+    <section id="features">
+        <div class="feature">
+            <h2>Gestion des Catways</h2>
+            <p>Accédez à la liste des catways et leur état en temps réel.</p>
+            <a href="/catways" class="button">Voir les Catways</a>
+        </div>
+        <div class="feature">
+            <h2>Gestion des Réservations</h2>
+            <p>Consultez et gérez les réservations facilement.</p>
+            <a href="/reservations" class="button">Voir les Réservations</a>
+        </div>
+        <div class="feature">
+            <h2>Gestion des Utilisateurs</h2>
+            <p>Créez, modifiez et supprimez les utilisateurs de manière efficace.</p>
+            <a href="/utilisateurs" class="button">Voir les Utilisateurs</a>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+</html>

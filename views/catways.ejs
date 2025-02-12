@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<%- include('partials/header') %>
+<body>
+    <h1 class="page-title"><%= title %></h1>
+
+    <!-- Formulaire d'ajout d'un catway -->
+    <h2 class="section-title">Ajouter un Catway</h2>
+    <form id="addCatwayForm" class="form-container" onsubmit="addCatway(event)">
+        <label for="catwayNumber">Numéro du catway :</label>
+        <input type="text" id="catwayNumber" name="catwayNumber" required />
+
+        <label for="catwayType">Type de catway :</label>
+        <input type="text" id="catwayType" name="catwayType" required />
+
+        <label for="catwayState">Statut :</label>
+        <input type="text" id="catwayState" name="catwayState" required />
+
+        <button type="submit">Ajouter un Catway</button>
+    </form>
+
+    <!-- Liste des catways -->
+    <table id="catwayTable" class="table">
+        <thead class="table-head">
+            <tr>
+                <th>Numéro</th>
+                <th>Type</th>
+                <th>Etat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            <% if (catways && catways.length > 0) { %>
+                <% catways.forEach(catway => { %>
+                    <tr>
+                        <td><%= catway.catwayNumber %></td>
+                        <td><%= catway.catwayType %></td>
+                        <td><%= catway.catwayState %></td>
+                        <td class="action-buttons">
+                            <button class="delete-btn" onclick="deleteCatway('<%= catway.catwayNumber %>')">Supprimer</button>
+                            <button class="edit-btn" onclick="toggleEditForm('<%= catway.catwayNumber %>')">Modifier</button>
+                        </td>
+                    </tr>
+                    <tr class="edit-row" id="editRow-<%= catway.catwayNumber %>" style="display: none;">
+                        <td colspan="4">
+                            <form onsubmit="updateCatway(event, '<%= catway.catwayNumber %>')" class="form-inline">
+                                <label for="editCatwayState-<%= catway.catwayNumber %>">Nouveau statut :</label>
+                                <input type="text" id="editCatwayState-<%= catway.catwayNumber %>" required>
+                                <button type="submit">Modifier</button>
+                                <button type="button" onclick="toggleEditForm('<%= catway.catwayNumber %>')">Annuler</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4" class="no-data">Aucun catway disponible</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <!-- Inclure le fichier JS -->
+    <script src="/static/js/catways.js"></script>
+</body>
+<%- include('partials/footer') %>
+</html> 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Réservations</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<%- include('partials/header') %>
+<body>
+    <h1 class="page-title">Gestion des Réservations</h1>
+
+    <!-- Formulaire pour ajouter une nouvelle réservation -->
+    <h2 class="section-title">Ajouter une Réservation</h2>
+    <form id="addReservationForm" class="form-container reservation-form">
+        <label for="catwayNumber">Numéro du catway :</label>
+        <input type="number" id="catwayNumber" class="form-input" name="catwayNumber" required>
+        
+        <label for="clientName">Nom du client :</label>
+        <input type="text" id="clientName" class="form-input" name="clientName" required>
+        
+        <label for="boatName">Nom du bateau :</label>
+        <input type="text" id="boatName" class="form-input" name="boatName" required>
+        
+        <label for="startDate">Date de début :</label>
+        <input type="date" id="startDate" class="form-input" name="startDate" required>
+        
+        <label for="endDate">Date de fin :</label>
+        <input type="date" id="endDate" class="form-input" name="endDate" required>
+        
+        <button type="submit" class="btn btn-primary">Ajouter une Réservation</button>
+    </form> 
+
+    <!-- Table des réservations -->
+    <table class="table reservation-table">
+        <thead class="table-head">
+            <tr>
+                <th class="table-header">Numéro du catway</th>
+                <th class="table-header">Nom du client</th>
+                <th class="table-header">Nom du bateau</th>
+                <th class="table-header">Date d'arrivée</th>
+                <th class="table-header">Date de départ</th>
+                <th class="table-header">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            <% if (reservations && reservations.length > 0) { %>
+                <% reservations.forEach(reservation => { %>
+                    <tr>
+                        <td><%= reservation.catwayNumber %></td>
+                        <td><%= reservation.clientName %></td>
+                        <td><%= reservation.boatName %></td>
+                        <td><%= new Date(reservation.startDate).toLocaleDateString() %></td>
+                        <td><%= new Date(reservation.endDate).toLocaleDateString() %></td>
+                        <td class="action-buttons">
+                            <button class="edit-btn" onclick="toggleEditForm('<%= reservation._id %>')">Modifier</button>
+                            <button class="delete-btn" onclick="deleteReservation('<%= reservation._id %>')">Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr class="edit-row" id="editRow-<%= reservation._id %>" style="display: none;">
+                        <td colspan="6">
+                            <form onsubmit="editReservation(event, '<%= reservation._id %>')" class="form-inline">
+                                <label for="editCatwayNumber-<%= reservation._id %>">Numéro du catway :</label>
+                                <input type="number" id="editCatwayNumber-<%= reservation._id %>" value="<%= reservation.catwayNumber %>" required>
+                                
+                                <label for="editClientName-<%= reservation._id %>">Nom du client :</label>
+                                <input type="text" id="editClientName-<%= reservation._id %>" value="<%= reservation.clientName %>" required>
+                                
+                                <label for="editBoatName-<%= reservation._id %>">Nom du bateau :</label>
+                                <input type="text" id="editBoatName-<%= reservation._id %>" value="<%= reservation.boatName %>" required>
+                                
+                                <label for="editStartDate-<%= reservation._id %>">Date de début :</label>
+                                <input type="date" id="editStartDate-<%= reservation._id %>" value="<%= new Date(reservation.startDate).toISOString().split('T')[0] %>" required>
+                                
+                                <label for="editEndDate-<%= reservation._id %>">Date de fin :</label>
+                                <input type="date" id="editEndDate-<%= reservation._id %>" value="<%= new Date(reservation.endDate).toISOString().split('T')[0] %>" required>
+                                
+                                <button type="submit">Modifier</button>
+                                <button type="button" onclick="toggleEditForm('<%= reservation._id %>')">Annuler</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="6" class="no-data">Aucune réservation disponible</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <script src="/static/js/reservations.js"></script>
+</body>
+</html>
