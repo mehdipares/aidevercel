@@ -60,7 +60,7 @@ app.use((req, res, next) => {
     res.cookie("authToken", req.cookies.authToken, {
       httpOnly: true,
       secure: true, // 🔹 Mets `true` si tu es en HTTPS
-      sameSite: "lax",
+      sameSite: "none",
     });
   } else {
     console.log("⚠️ Aucun cookie trouvé !");
