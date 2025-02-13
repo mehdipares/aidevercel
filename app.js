@@ -59,7 +59,7 @@ app.use((req, res, next) => {
   if (req.cookies.authToken) {
     res.cookie("authToken", req.cookies.authToken, {
       httpOnly: true,
-      secure: false, // 🔹 Mets `true` si tu es en HTTPS
+      secure: true, // 🔹 Mets `true` si tu es en HTTPS
       sameSite: "lax",
     });
   } else {
