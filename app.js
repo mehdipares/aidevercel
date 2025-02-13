@@ -43,7 +43,7 @@ app.use((err, req, res, next) => {
 app.use(
   cors({
     exposedHeaders: ['Authorization'],
-    origin: '*',
+    origin: 'https://aidevercel.vercel.app/',
     credentials: true // ✅ Permet l'envoi des cookies avec les requêtes
   })
 );
