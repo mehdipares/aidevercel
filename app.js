@@ -43,7 +43,7 @@ app.use((err, req, res, next) => {
 app.use(
   cors({
     exposedHeaders: ['Authorization'],
-    origin: 'https://aidevercel.vercel.app/',
+    origin: 'https://aidevercel.vercel.app',
     credentials: true // ✅ Permet l'envoi des cookies avec les requêtes
   })
 );
@@ -60,7 +60,7 @@ app.use((req, res, next) => {
     res.cookie("authToken", req.cookies.authToken, {
       httpOnly: true,
       secure: true, // 🔹 Mets `true` si tu es en HTTPS
-      sameSite: "none",
+      sameSite: "lax",
     });
   } else {
     console.log("⚠️ Aucun cookie trouvé !");
