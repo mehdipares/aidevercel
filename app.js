@@ -60,7 +60,7 @@ app.use((req, res, next) => {
     res.cookie("authToken", req.cookies.authToken, {
       httpOnly: true,
       secure: true, // 🔹 Mets `true` si tu es en HTTPS
-      sameSite: "lax",
+      sameSite: "none",
     });
   } else {
     console.log("⚠️ Aucun cookie trouvé !");
@@ -126,13 +126,13 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const response = await axios.post('http://localhost:3000/api/users/authenticate', { email, password });
+    const response = await axios.post('https://aidevercel-eweq.vercel.app/api/users/authenticate', { email, password });
     const token = response.data.token;
 
     res.cookie('authToken', `Bearer ${token}`, {
       httpOnly: true,
       secure: true, // ❗ Mets `true` si en HTTPS
-      sameSite: "lax"
+      sameSite: "none"
     });
 
     // ✅ Correction : Redirection vers l'accueil avec le token dans l'URL
@@ -163,7 +163,7 @@ app.get('/catways', checkJWT, async (req, res) => {
 
     const token = req.cookies.authToken || req.headers.authorization;
 
-    const response = await axios.get('http://localhost:3000/api/catways', {
+    const response = await axios.get('https://aidevercel-eweq.vercel.app/api/catways', {
       headers: { Authorization: token },
     });
 
@@ -191,7 +191,7 @@ app.get('/reservations', checkJWT, async (req, res) => {
       return res.status(401).render('500', { title: 'Erreur Serveur', message: 'Authentification requise.' });
     }
 
-    const response = await axios.get('http://localhost:3000/api/reservations', {
+    const response = await axios.get('https://aidevercel-eweq.vercel.app/api/reservations', {
       headers: { Authorization: tokenFromCookie },
     });
 
