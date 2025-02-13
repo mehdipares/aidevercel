@@ -131,7 +131,7 @@ app.post('/login', async (req, res) => {
 
     res.cookie('authToken', `Bearer ${token}`, {
       httpOnly: true,
-      secure: false, // ❗ Mets `true` si en HTTPS
+      secure: true, // ❗ Mets `true` si en HTTPS
       sameSite: "lax"
     });
 
