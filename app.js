@@ -126,7 +126,7 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const response = await axios.post('https://aidevercel.vercel.app/users/authenticate', { email, password });
+    const response = await axios.post('https://aidevercel-eweq.vercel.app/api/users/authenticate', { email, password });
     const token = response.data.token;
 
     res.cookie('authToken', `Bearer ${token}`, {
@@ -163,7 +163,7 @@ app.get('/catways', checkJWT, async (req, res) => {
 
     const token = req.cookies.authToken || req.headers.authorization;
 
-    const response = await axios.get('https://aidevercel-eweq.vercel.app/api/catways', {
+    const response = await axios.get('https://aidevercel.vercel.app/api/catways', {
       headers: { Authorization: token },
     });
 
@@ -191,7 +191,7 @@ app.get('/reservations', checkJWT, async (req, res) => {
       return res.status(401).render('500', { title: 'Erreur Serveur', message: 'Authentification requise.' });
     }
 
-    const response = await axios.get('https://aidevercel-eweq.vercel.app/api/reservations', {
+    const response = await axios.get('https://aidevercel.vercel.app/api/reservations', {
       headers: { Authorization: tokenFromCookie },
     });
 
