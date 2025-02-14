@@ -9,7 +9,7 @@ window.addCatway = async function (event) {
     const catwayState = document.getElementById('catwayState').value;
 
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(process.env.API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ window.addCatway = async function (event) {
 window.deleteCatway = async function (catwayNumber) {
     if (confirm('Voulez-vous vraiment supprimer ce catway ?')) {
         try {
-            const response = await fetch(`${API_URL}/${catwayNumber}`, {
+            const response = await fetch(`${process.env.API_URL}/${catwayNumber}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: localStorage.getItem('token'),
@@ -66,7 +66,7 @@ window.updateCatway = async function (event, catwayNumber) {
     const catwayState = document.getElementById(`editCatwayState-${catwayNumber}`).value;
 
     try {
-        const response = await fetch(`${API_URL}/${catwayNumber}`, {
+        const response = await fetch(`${process.env.API_URL}/${catwayNumber}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
