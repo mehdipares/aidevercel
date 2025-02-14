@@ -131,8 +131,8 @@ app.post('/login', async (req, res) => {
 
     res.cookie('authToken', `Bearer ${token}`, {
       httpOnly: true,
-      secure: true, // ❗ Mets `true` si en HTTPS
-      sameSite: "none"
+      secure: false, // ❗ Mets `true` si en HTTPS
+      sameSite: "lax"
     });
 
     // ✅ Correction : Redirection vers l'accueil avec le token dans l'URL
