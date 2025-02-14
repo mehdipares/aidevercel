@@ -1,10 +1,10 @@
 console.log('users.js chargé avec succès');
-const API_URL = 'http://localhost:3000/api/users';
+
 
 // Charger les utilisateurs existants
 window.loadUsers = async function () {
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(process.env.API_URL, {
             headers: { 'Authorization': localStorage.getItem('token') },
         });
 
@@ -45,7 +45,7 @@ document.getElementById('addUserForm').addEventListener('submit', async (event) 
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch(`${API_URL}/add`, {
+        const response = await fetch(`${process.env.API_URL}/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ document.getElementById('addUserForm').addEventListener('submit', async (event) 
 window.deleteUser = async function (userId) {
     if (confirm('Voulez-vous vraiment supprimer cet utilisateur ?')) {
         try {
-            const response = await fetch(`${API_URL}/${userId}`, {
+            const response = await fetch(`${process.env.API_URL}/${userId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': localStorage.getItem('token') },
             });
@@ -114,7 +114,7 @@ window.showEditForm = function (userId, name, firstname, email) {
         const updatedEmail = document.getElementById('emailEdit').value;
 
         try {
-            const response = await fetch(`${API_URL}/${userId}`, {
+            const response = await fetch(`${process.env.API_URL}/${userId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

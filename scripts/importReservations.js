@@ -4,7 +4,7 @@ const path = require('path');
 const Reservation = require('../models/reservation');
 
 // Connexion à MongoDB
-mongoose.connect('mongodb://localhost:27017/Catwaysmarina', {
+mongoose.connect(process.env.URL_MONGO,{
     serverSelectionTimeoutMS: 30000, // Augmenter le délai d'attente à 30 secondes
 }).then(() => {
     console.log('Connected to MongoDB');

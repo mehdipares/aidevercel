@@ -1,5 +1,5 @@
 console.log("✅ reservations.js chargé avec succès");
-const API_URL = "http://localhost:3000/api/reservations";
+
 
 console.log("🔍 Token depuis localStorage sur la page réservations :", localStorage.getItem("token"));
 console.log("🔍 Cookies disponibles :", document.cookie);
@@ -15,7 +15,7 @@ window.loadReservations = async function () {
             return;
         }
 
-        const response = await fetch(API_URL, {
+        const response = await fetch(process.env.API_URL, {
             headers: {
                 "Authorization": token,
                 "Content-Type": "application/json"
@@ -110,7 +110,7 @@ window.editReservation = async function (event, reservationId) {
     };
 
     try {
-        const response = await fetch(`${API_URL}/${reservationId}`, {
+        const response = await fetch(`${process.env.API_URL}/${reservationId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -134,7 +134,7 @@ window.editReservation = async function (event, reservationId) {
 window.deleteReservation = async function (reservationId) {
     if (confirm("Voulez-vous vraiment supprimer cette réservation ?")) {
         try {
-            const response = await fetch(`${API_URL}/${reservationId}`, {
+            const response = await fetch(`${process.env.API_URL}/${reservationId}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": localStorage.getItem("token"),
@@ -166,7 +166,7 @@ document.getElementById("addReservationForm").addEventListener("submit", async f
     console.log("➕ Tentative d'ajout de réservation :", { catwayNumber, clientName, boatName, startDate, endDate });
 
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(process.env.API_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
