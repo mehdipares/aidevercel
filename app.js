@@ -126,7 +126,7 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const response = await axios.post('https://aidevercel-eweq.vercel.app/api/users/authenticate', { email, password });
+    const response = await axios.post('https://aidevercel.vercel.app/api/users/authenticate', { email, password });
     const token = response.data.token;
 
     res.cookie('authToken', `Bearer ${token}`, {
